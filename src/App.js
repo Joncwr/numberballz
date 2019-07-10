@@ -12,7 +12,8 @@ export default class Main extends React.Component {
       foulStake: 3,
       gameStake: 5,
       players: 3,
-      playersData: []
+      playersData: [],
+      counter: 0,
     }
     this.onChange=this.onChange.bind(this)
     this.addPlayer=this.addPlayer.bind(this)
@@ -54,9 +55,17 @@ export default class Main extends React.Component {
   }
 
   initiateDelete(index) {
-    mouseTimer = setTimeout(function() {
+    clearTimeout(mouseTimer)
+    if (this.state.counter > 6) {
       this.deletePlayer(index)
-    }, 1500)
+      this.setState({counter: 0})
+    }
+    else {
+      this.setState({counter: this.state.counter + 1})
+      mouseTimer = setTimeout(() => {
+        this.setState({counter: 0})
+      }, 1500)
+    }
   }
 
   deletePlayer(index) {
@@ -82,11 +91,14 @@ export default class Main extends React.Component {
           winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index,winnings)} />
           losings = '-'
         }
+        let color = '#ff8080'
+        if (this.state.counter > 2) color = '#ff3333'
+        if (this.state.counter > 4) color = '#e60000'
         renderPlayers.push(
           <div key={i} className="main-container-players">
             <div className="main-container-player-subContainers">
-              <div className="main-container-player-subContainers-remove" onMouseDown={() => this.initiateDelete(index)} onMouseUp={() => clearTimeout(mouseTimer)}>
-                <div style={{marginBottom: '1vh', color: '#4c4c4c'}}>x</div>
+              <div className="main-container-player-subContainers-remove" style={{backgroundColor:color}} onClick={() => this.initiateDelete(index)}>
+                <div style={{marginBottom: '0vh', color: '#4c4c4c'}}>x</div>
               </div>
               <div className="main-container-player-subContainers-postion">
                 {this.state.playersData[i].position}
