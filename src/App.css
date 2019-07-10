@@ -106,6 +106,7 @@
   border-radius: 50%;
   font-size: 4vh;
   background-color: #ff8080;
+  cursor: pointer;
 }
 
 .main-container-player-subContainers-postion {
