@@ -1,0 +1,126 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  padding: 2%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff2e6;
+  overflow: hidden;
+}
+
+.main-container--wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.main-container-players {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+}
+
+.main-container-player-subContainers {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container-player-subContainers-input {
+  height: 50%;
+  width: 50%;
+  background-color: #fff2e6;
+  border: none;
+  text-decoration: none;
+  font-size: 500%;
+  color: #4c4c4c;
+  padding: 20px 20px;
+  margin: 20px 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.main-container-player-subContainers-value {
+  font-size: 500%;
+}
+
+.main-container-player-subContainers:nth-child(n+3) {
+  border-top: 4px solid black;
+}
+
+.main-container-players:nth-child(n+2) {
+  border-left: 4px solid black;
+}
+
+.main-actions {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  background-color: #ffcc99;
+}
+
+.main-actions-container {
+  flex: 1;
+  display: flex;
+}
+
+.main-actions-container:nth-child(n+2) {
+  border-left: 4px solid black;
+}
+
+.main-actions-container-undo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-actions-container-undoPlus,
+.main-actions-container-undoFoul {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+  font-size: 100%;
+  border-radius: 100px;
+  background-color: #66ccff;
+  border: 2px solid #4c4c4c;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+.main-actions-container-plus,
+.main-actions-container-foul {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background-color: #66ccff;
+  border: 2px solid #4c4c4c;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+.main-actions-container-plus,
+.main-actions-container-foul {
+  margin: 3%;
+  font-size: 200%;
+}
+
+.main-actions-container-plus {
+  background-color: #80ff80;
+}
+
+.main-actions-container-foul {
+  background-color: #ff4d4d;
+}
