@@ -21,13 +21,14 @@
   height: 100%;
   width: 100%;
   display: flex;
+  overflow: hidden;
 }
 
 .main-gameOptions {
   height: 15%;
   width: 100%;
   background-color: #ffc299;
-  border-bottom: 2px solid #4c4c4c;
+  border-bottom: .4vh solid #993300;
   box-sizing: border-box;
   display: flex;
 }
@@ -49,7 +50,7 @@
   align-items: center;
   font-size: 3vh;
   background-color: #ffaa80;
-  border-left: .4vh solid #4c4c4c;
+  border-left: .4vh solid #993300;
 }
 
 .main-gameOptions-container-shufflePosition {
@@ -60,7 +61,7 @@
   font-size: 3vh;
   text-align: center;
   background-color: #ff884d;
-  border-left: .4vh solid #4c4c4c;
+  border-left: .4vh solid #993300;
 }
 
 .main-gameOptions-container-input {
@@ -80,6 +81,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 2%;
+  overflow: hidden;
 }
 
 .main-container-player-subContainers {
@@ -88,6 +90,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 .main-container-player-subContainers-remove {
@@ -177,7 +180,7 @@
 }
 
 .main-actions-container:nth-child(n+2) {
-  border-left: .5vh solid black;
+  border-left: .5vh solid #4c4c4c;
 }
 
 .main-actions-container-undo {
