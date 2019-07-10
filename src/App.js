@@ -25,7 +25,7 @@ export default class Main extends React.Component {
   componentDidMount() {
     let playersData = Object.assign([], this.state.playersData)
     for (var i = 0; i < this.state.players; i++) {
-      playersData.push({name: '-', pl: 0, fouls: 0, position: 0})
+      playersData.push({name: '', pl: 0, fouls: 0, position: 0})
     }
 
     this.setState({playersData})
@@ -91,7 +91,7 @@ export default class Main extends React.Component {
               <div className="main-container-player-subContainers-postion">
                 {this.state.playersData[i].position}
               </div>
-              <input className='main-container-player-subContainers-input' value={this.state.playersData[index].name} type="text" onChange={(e) => this.onChange('name',e,index)}/>
+              <input className='main-container-player-subContainers-input' placeholder='-' value={this.state.playersData[index].name} type="text" onChange={(e) => this.onChange('name',e,index)}/>
             </div>
             <div className="main-container-player-subContainers">
               <div className="main-container-player-subContainers-value">
@@ -214,7 +214,7 @@ export default class Main extends React.Component {
     if (this.state.players < 4) {
       let newPlayers = this.state.players + 1
       let playersData = Object.assign([], this.state.playersData)
-      playersData.push({name: '-', pl: 0, fouls: 0, position: 0})
+      playersData.push({name: '', pl: 0, fouls: 0, position: 0})
 
       this.setState({players: newPlayers, playersData})
     }
