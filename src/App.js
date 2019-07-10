@@ -54,7 +54,7 @@ export default class Main extends React.Component {
   }
 
   initiateDelete(index) {
-    mouseTimer = setTimeout(() => {
+    mouseTimer = setTimeout(function() {
       this.deletePlayer(index)
     }, 1500)
   }
@@ -76,10 +76,10 @@ export default class Main extends React.Component {
         let losings = 0
         if (this.state.playersData[i].pl < 0) {
           winnings = '-'
-          losings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index)}/>
+          losings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index)} />
         }
         else {
-          winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index,winnings)}/>
+          winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index,winnings)} />
           losings = '-'
         }
         renderPlayers.push(
