@@ -23,6 +23,58 @@
   display: flex;
 }
 
+.main-gameOptions {
+  height: 15%;
+  width: 100%;
+  background-color: #ffc299;
+  border-bottom: 2px solid #4c4c4c;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.main-gameOptions-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vh;
+  color: #4c4c4c;
+}
+
+.main-gameOptions-container-addPlayer {
+  width: 20vh;
+  margin-left: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vh;
+  background-color: #ffaa80;
+  border-left: .4vh solid #4c4c4c;
+}
+
+.main-gameOptions-container-shufflePosition {
+  width: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vh;
+  text-align: center;
+  background-color: #ff884d;
+  border-left: .4vh solid #4c4c4c;
+}
+
+.main-gameOptions-container-input {
+  width: 30%;
+  background-color: #fff2e6;
+  border: none;
+  text-decoration: none;
+  font-size: 4vh;
+  color: #4c4c4c;
+  margin-left: 2vh;
+  text-align: center;
+  cursor: pointer;
+}
+
 .main-container-players {
   flex: 1;
   display: flex;
@@ -35,6 +87,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.main-container-player-subContainers-remove {
+  position: absolute;
+  top: 2vh;
+  right: 2vh;
+  height: 5vh;
+  width: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: .5vh solid #4c4c4c;
+  border-radius: 50%;
+  font-size: 4vh;
+  background-color: #ff8080;
+}
+
+.main-container-player-subContainers-postion {
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+  height: 5vh;
+  width: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: .5vh solid #4c4c4c;
+  font-size: 4vh;
+  font-weight: 700;
+  background-color: #fff;
 }
 
 .main-container-player-subContainers-input {
@@ -43,7 +126,7 @@
   background-color: #fff2e6;
   border: none;
   text-decoration: none;
-  font-size: 500%;
+  font-size: 10vh;
   color: #4c4c4c;
   padding: 20px 20px;
   margin: 20px 20px;
@@ -51,23 +134,41 @@
   cursor: pointer;
 }
 
+.main-container-player-subContainers-valueInput {
+  width: 100%;
+  background-color: #fff2e6;
+  border: none;
+  text-decoration: none;
+  font-size: 10vh;
+  color: #4c4c4c;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 2vh;
+}
+
 .main-container-player-subContainers-value {
-  font-size: 500%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vh;
+  color: #4c4c4c;
 }
 
 .main-container-player-subContainers:nth-child(n+3) {
-  border-top: 4px solid black;
+  border-top: .5vh solid #4c4c4c;
 }
 
 .main-container-players:nth-child(n+2) {
-  border-left: 4px solid black;
+  border-left: .5vh solid #4c4c4c;
 }
 
 .main-actions {
-  height: 15%;
+  height: 25%;
   width: 100%;
   display: flex;
-  background-color: #ffcc99;
+  background-color: #ffc299;
+  border-top: 2px solid #4c4c4c;
+  box-sizing: border-box;
 }
 
 .main-actions-container {
@@ -76,23 +177,26 @@
 }
 
 .main-actions-container:nth-child(n+2) {
-  border-left: 4px solid black;
+  border-left: .5vh solid black;
 }
 
 .main-actions-container-undo {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 1vh 1vh;
 }
 
 .main-actions-container-undoPlus,
-.main-actions-container-undoFoul {
+.main-actions-container-undoFoul,
+.main-actions-container-undoGame {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5%;
-  font-size: 100%;
+  margin: 4%;
+  font-size: 1.8vh;
+  text-align: center;
   border-radius: 100px;
   background-color: #66ccff;
   border: 2px solid #4c4c4c;
@@ -100,27 +204,25 @@
 }
 
 .main-actions-container-plus,
-.main-actions-container-foul {
+.main-actions-container-foul,
+.main-actions-container-game {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100px;
-  background-color: #66ccff;
-  border: 2px solid #4c4c4c;
   box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
-}
-
-.main-actions-container-plus,
-.main-actions-container-foul {
-  margin: 3%;
-  font-size: 200%;
+  font-size: 3vh;
+  border-left: 2px solid #4c4c4c;
 }
 
 .main-actions-container-plus {
-  background-color: #80ff80;
+  background-color: #b3ffcc;
 }
 
 .main-actions-container-foul {
-  background-color: #ff4d4d;
+  background-color: #ff9999;
+}
+
+.main-actions-container-game {
+  background-color: #80b3ff;
 }
