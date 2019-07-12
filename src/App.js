@@ -20,12 +20,13 @@ export default class Main extends React.Component {
     this.initiateDelete=this.initiateDelete.bind(this)
     this.changeValue=this.changeValue.bind(this)
     this.shuffleRotation=this.shuffleRotation.bind(this)
+    this.setFoulStake=this.setFoulStake.bind(this)
   }
 
   componentDidMount() {
     let playersDataLS = localStorage.playersData
     if (playersDataLS) {
-      this.setState({playersData: JSON.parse(playersDataLS)})
+      this.setState({playersData: JSON.parse(playersDataLS)},() => this.setFoulStake())
     }
     else {
       let playersData = Object.assign([], this.state.playersData)
@@ -33,14 +34,30 @@ export default class Main extends React.Component {
         playersData.push({name: '', pl: 0, fouls: 0, position: 0})
       }
       localStorage.setItem('playersData', JSON.stringify(playersData))
-      this.setState({playersData})
+      this.setState({playersData},() => this.setFoulStake())
     }
+  }
+
+  setFoulStake() {
+    let foulStake = this.state.playersData.length-1 * 1
+    this.setState({foulStake})
   }
 
   onChange(method, e, index, values) {
     if (method === 'name') {
       let playersData = Object.assign([], this.state.playersData)
       playersData[index].name = e.target.value
+      this.setState({playersData},() => {
+        localStorage.setItem('playersData', JSON.stringify(playersData))
+      })
+    }
+    else if (method === 'fouls') {
+      let value = e.target.value
+      if (value > 0) {
+        value = -value
+      }
+      let playersData = Object.assign([], this.state.playersData)
+      playersData[index].fouls = parseInt(value, 10)
       this.setState({playersData},() => {
         localStorage.setItem('playersData', JSON.stringify(playersData))
       })
@@ -53,17 +70,6 @@ export default class Main extends React.Component {
     }
     else if (method === 'gameStake') {
       this.setState({gameStake: e.target.value})
-    }
-    else if (method === 'fouls') {
-      let value = e.target.value
-      if (value > 0) {
-        value = -value
-      }
-      let playersData = Object.assign([], this.state.playersData)
-      playersData[index].fouls = parseInt(value, 10)
-      this.setState({playersData},() => {
-        localStorage.setItem('playersData', JSON.stringify(playersData))
-      })
     }
     else if (method === 'values') {
       let value = e.target.value
