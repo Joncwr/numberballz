@@ -11,7 +11,6 @@ export default class Main extends React.Component {
       winningStake: 1,
       foulStake: 3,
       gameStake: 5,
-      players: 3,
       playersData: [],
       counter: 0,
     }
@@ -24,19 +23,27 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    let playersData = Object.assign([], this.state.playersData)
-    for (var i = 0; i < this.state.players; i++) {
-      playersData.push({name: '', pl: 0, fouls: 0, position: 0})
+    let playersDataLS = localStorage.playersData
+    if (playersDataLS) {
+      this.setState({playersData: JSON.parse(playersDataLS)})
     }
-
-    this.setState({playersData})
+    else {
+      let playersData = Object.assign([], this.state.playersData)
+      for (var i = 0; i < 3; i++) {
+        playersData.push({name: '', pl: 0, fouls: 0, position: 0})
+      }
+      localStorage.setItem('playersData', JSON.stringify(playersData))
+      this.setState({playersData})
+    }
   }
 
   onChange(method, e, index, values) {
     if (method === 'name') {
       let playersData = Object.assign([], this.state.playersData)
       playersData[index].name = e.target.value
-      this.setState({playersData})
+      this.setState({playersData},() => {
+        localStorage.setItem('playersData', JSON.stringify(playersData))
+      })
     }
     else if (method === 'winningStake') {
       this.setState({winningStake: e.target.value})
@@ -47,10 +54,27 @@ export default class Main extends React.Component {
     else if (method === 'gameStake') {
       this.setState({gameStake: e.target.value})
     }
-    else if (method === 'values') {
+    else if (method === 'fouls') {
+      let value = e.target.value
+      if (value > 0) {
+        value = -value
+      }
       let playersData = Object.assign([], this.state.playersData)
-      playersData[index].pl = parseInt(e.target.value, 10)
-      this.setState({playersData})
+      playersData[index].fouls = parseInt(value, 10)
+      this.setState({playersData},() => {
+        localStorage.setItem('playersData', JSON.stringify(playersData))
+      })
+    }
+    else if (method === 'values') {
+      let value = e.target.value
+      if (values === 'negative' && value > 0) {
+        value = -value
+      }
+      let playersData = Object.assign([], this.state.playersData)
+      playersData[index].pl = parseInt(value, 10)
+      this.setState({playersData},() => {
+        localStorage.setItem('playersData', JSON.stringify(playersData))
+      })
     }
   }
 
@@ -73,7 +97,9 @@ export default class Main extends React.Component {
     let playersData = Object.assign([], this.state.playersData)
     playersData.splice(index, 1)
 
-    this.setState({players: newPlayers, playersData})
+    this.setState({playersData},() => {
+      localStorage.setItem('playersData', JSON.stringify(playersData))
+    })
   }
 
   renderPlayers() {
@@ -81,15 +107,17 @@ export default class Main extends React.Component {
       let renderPlayers = []
       for (var i = 0; i < this.state.playersData.length; i++) {
         let index = i
-        let winnings = 0
-        let losings = 0
+        let winnings
+        let losings
         if (this.state.playersData[i].pl < 0) {
-          winnings = '-'
-          losings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index)} />
+          losings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index, 'negative')} />
+        }
+        else if (this.state.playersData[i].pl > 0) {
+          winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index)} />
         }
         else {
-          winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index,winnings)} />
-          losings = '-'
+          winnings = <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index)} />
+          losings =  <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].pl} type="number" onChange={(e) => this.onChange('values',e,index, 'negative')} />
         }
         let color = '#ff8080'
         if (this.state.counter > 2) color = '#ff3333'
@@ -117,7 +145,7 @@ export default class Main extends React.Component {
             </div>
             <div className="main-container-player-subContainers">
               <div className="main-container-player-subContainers-value">
-                {this.state.playersData[index].fouls}
+                <input className='main-container-player-subContainers-valueInput' value={this.state.playersData[i].fouls} type="number" onChange={(e) => this.onChange('fouls',e,index)} />
               </div>
             </div>
           </div>
@@ -133,7 +161,7 @@ export default class Main extends React.Component {
     if (method === '+') {
       for (var i = 0; i < playersData.length; i++) {
         if (i === index) {
-          playersData[i].pl = playersData[i].pl + (this.state.winningStake * (this.state.players-1))
+          playersData[i].pl = playersData[i].pl + (this.state.winningStake * (this.state.playersData.length-1))
         }
         else {
           playersData[i].pl = playersData[i].pl - this.state.winningStake
@@ -143,7 +171,7 @@ export default class Main extends React.Component {
     else if (method === 'undoPlus') {
       for (var i = 0; i < playersData.length; i++) {
         if (i === index) {
-          playersData[i].pl = playersData[i].pl - (this.state.winningStake * (this.state.players-1))
+          playersData[i].pl = playersData[i].pl - (this.state.winningStake * (this.state.playersData.length-1))
         }
         else {
           playersData[i].pl = playersData[i].pl + this.state.winningStake
@@ -153,7 +181,7 @@ export default class Main extends React.Component {
     else if (method === 'game') {
       for (var i = 0; i < playersData.length; i++) {
         if (i === index) {
-          playersData[i].pl = playersData[i].pl + (this.state.gameStake * (this.state.players-1))
+          playersData[i].pl = playersData[i].pl + (this.state.gameStake * (this.state.playersData.length-1))
         }
         else {
           playersData[i].pl = playersData[i].pl - this.state.gameStake
@@ -163,7 +191,7 @@ export default class Main extends React.Component {
     else if (method === 'undoGame') {
       for (var i = 0; i < playersData.length; i++) {
         if (i === index) {
-          playersData[i].pl = playersData[i].pl - (this.state.gameStake * (this.state.players-1))
+          playersData[i].pl = playersData[i].pl - (this.state.gameStake * (this.state.playersData.length-1))
         }
         else {
           playersData[i].pl = playersData[i].pl + this.state.gameStake
@@ -185,13 +213,15 @@ export default class Main extends React.Component {
       }
     }
 
-    this.setState({playersData})
+    this.setState({playersData},() => {
+      localStorage.setItem('playersData', JSON.stringify(playersData))
+    })
   }
 
   renderActions() {
     let renderActions = []
 
-    for (var i = 0; i < this.state.players; i++) {
+    for (var i = 0; i < this.state.playersData.length; i++) {
       let index = i
       renderActions.push(
         <div className="main-actions-container" key={i}>
@@ -223,12 +253,14 @@ export default class Main extends React.Component {
   }
 
   addPlayer() {
-    if (this.state.players < 4) {
-      let newPlayers = this.state.players + 1
+    if (this.state.playersData.length < 4) {
+      let newPlayers = this.state.playersData.length + 1
       let playersData = Object.assign([], this.state.playersData)
       playersData.push({name: '', pl: 0, fouls: 0, position: 0})
 
-      this.setState({players: newPlayers, playersData})
+      this.setState({playersData},() => {
+        localStorage.setItem('playersData', JSON.stringify(playersData))
+      })
     }
   }
 
