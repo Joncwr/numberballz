@@ -180,7 +180,7 @@ export default class Main extends React.Component {
     else if (method === 'undoFoul') {
       for (var i = 0; i < playersData.length; i++) {
         if (i === index) {
-          playersData[i].fouls = playersData[i].fouls + this.state.foulStake
+          playersData[i].fouls = playersData[i].fouls + parseInt(this.state.foulStake)
         }
       }
     }
@@ -273,15 +273,15 @@ export default class Main extends React.Component {
           <div className="main-gameOptions">
             <div className="main-gameOptions-container">
               Money Ball:
-              <input className='main-gameOptions-container-input' value={this.state.winningStake} type="text" onChange={(e) => this.onChange('winningStake',e)}/>
+              <input className='main-gameOptions-container-input' value={this.state.winningStake} type="number" onChange={(e) => this.onChange('winningStake',e)}/>
             </div>
             <div className="main-gameOptions-container">
               Foul:
-              <input className='main-gameOptions-container-input' value={this.state.foulStake} type="text" onChange={(e) => this.onChange('foulStake',e)}/>
+              <input className='main-gameOptions-container-input' value={this.state.foulStake} type="number" onChange={(e) => this.onChange('foulStake',e)}/>
             </div>
             <div className="main-gameOptions-container">
               Game:
-              <input className='main-gameOptions-container-input' value={this.state.gameStake} type="text" onChange={(e) => this.onChange('gameStake',e)}/>
+              <input className='main-gameOptions-container-input' value={this.state.gameStake} type="number" onChange={(e) => this.onChange('gameStake',e)}/>
             </div>
             <div className="main-gameOptions-container-addPlayer" onClick={this.addPlayer}>
               Add Player
