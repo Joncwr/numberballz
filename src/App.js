@@ -180,7 +180,7 @@ export default class Main extends React.Component {
           playersData[i].pl = playersData[i].pl - (this.state.winningStake * (this.state.playersData.length-1))
         }
         else {
-          playersData[i].pl = playersData[i].pl + this.state.winningStake
+          playersData[i].pl = playersData[i].pl + parseInt(this.state.winningStake, 10)
         }
       }
     }
@@ -200,7 +200,7 @@ export default class Main extends React.Component {
           playersData[i].pl = playersData[i].pl - (this.state.gameStake * (this.state.playersData.length-1))
         }
         else {
-          playersData[i].pl = playersData[i].pl + this.state.gameStake
+          playersData[i].pl = playersData[i].pl + parseInt(this.state.gameStake, 10)
         }
       }
     }
@@ -259,7 +259,7 @@ export default class Main extends React.Component {
   }
 
   addPlayer() {
-    if (this.state.playersData.length < 4) {
+    if (this.state.playersData.length < 5) {
       let newPlayers = this.state.playersData.length + 1
       let playersData = Object.assign([], this.state.playersData)
       playersData.push({name: '', pl: 0, fouls: 0, position: 0})
